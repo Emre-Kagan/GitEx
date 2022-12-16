@@ -1,0 +1,296 @@
+﻿@model OgrenciKayit.Models.OgrenciDers
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Not Girişi</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.Label("Yıl", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Yil, ViewBag.Yil as SelectList, "Seçiniz", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Yil, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Dönem", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Donem, new SelectList(""), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Donem, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Ders Adı", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.DersID, new SelectList(""), htmlAttributes: new { @class = "js-example-basic-single" })
+            @Html.ValidationMessageFor(model => model.DersID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Ad-Soyad", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.OgrenciID, new SelectList(""),htmlAttributes: new { @class = "js-example-basic-single" })
+            @Html.ValidationMessageFor(model => model.OgrenciID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vize, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vize, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vize, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Mazeret Vize", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MazeretVize, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MazeretVize, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Final, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Final, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Final, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Bütünleme", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Butunleme, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Butunleme, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Tek Ders", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TekDers, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TekDers, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Başarı Notu", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BasariNotu, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.BasariNotu, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Harf Notu", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HarfNotu, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Kaydet" id="btn1" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+    <script>
+
+        var v = document.getElementById("Vize");
+        var mv = document.getElementById("MazeretVize");
+        var f = document.getElementById("Final");
+        var b = document.getElementById("Butunleme");
+        var ek = document.getElementById("TekDers");
+
+
+        var cbtn = document.getElementById("btn1");
+
+        cbtn.onclick = function () {
+
+            if (Number(v.value) != "" && Number(mv.value) != "") {
+
+
+                alert("Vize veya Mazeret Vize notundan sadece bir tanesi girilmelidir!");
+                return false;
+
+            }
+        }
+
+    </script>
+
+
+
+}
+
+<div>
+    @Html.ActionLink("Geri Dön", "Index")
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+
+    $(function () {
+
+        function setForm() {
+            
+            var yil = $('#Yil').val();
+
+            if (yil) {
+                fetch('https://localhost:44329/OgrenciDers/DonemKontrol?yil=' + yil)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        $('#Donem').empty();
+                        $('#Donem').append("<option>Seçiniz</Option>");
+                        for (var i = 0; i < data.length; i++) {
+
+                            $('#Donem').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+
+                        }
+                    });
+            }
+
+
+
+        }
+
+       
+        $('#Yil').change(setForm);
+      
+
+    });
+
+</script>
+
+<script>
+
+    $(function () {
+
+        function setForm() {
+
+            var yil = $('#Yil').val();
+            var donem = $('#Donem').val();
+
+            if (yil && donem) {
+                fetch('https://localhost:44329/OgrenciDers/GetOgrenciDers?yil=' + yil + '&donem=' + donem)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data);
+                        $('#DersID').empty();
+                        $('#DersID').append("<option>Seçiniz</Option>");
+                        for (var i = 0; i < data.length; i++) {
+
+                            $('#DersID').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+
+                        }
+                    });
+            }
+
+
+
+        }
+
+        $('#Donem').change(setForm);
+
+
+    });
+
+</script>
+
+<script>
+
+    $(function () {
+
+        $('#DersID').change(function () {
+
+            var id = $('#DersID').val();
+            var yil = $('#Yil').val();
+            var donem = $('#Donem').val();
+
+            $.ajax({
+
+                url: '/OgrenciDers/OgrenciListesi',
+
+                data: { d: id, y: yil, dnm: donem },
+
+                type: "POST",
+
+                dataType: "Json",
+
+                success: function (data) {
+
+                    console.log(data);
+
+                    $('#OgrenciID').empty();
+                    $('#OgrenciID').append("<option>Seçiniz</Option>");
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        $('#OgrenciID').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+
+                    }
+                 
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+
+
+<script>
+
+    $(function () {
+
+        function setForm() {
+            var ogrID = $('#OgrenciID').val();
+            var dersID = $('#DersID').val();
+            var yil = $('#Yil').val();
+            var donem = $('#Donem').val();
+
+            if (ogrID && dersID && yil && donem) {
+                fetch('https://localhost:44329/OgrenciDers/OgrenciNotlar?ogrID=' + ogrID + '&dersID=' + dersID + '&yil=' + yil + '&donem=' + donem)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        $("#Vize").val(data.Vize);
+                        $("#MazeretVize").val(data.MazeretVize);
+                        $("#Final").val(data.Final);
+                        $("#Butunleme").val(data.Butunleme);
+                        $("#TekDers").val(data.TekDers);
+                        $("#BasariNotu").val(data.BasariNotu);
+                        $("#HarfNotu").val(data.HarfNotu);
+                    });
+            }
+
+           
+
+        }
+
+       
+        $('#OgrenciID').change(setForm);
+      
+
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+    });
+</script>

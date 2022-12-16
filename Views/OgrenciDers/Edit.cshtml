@@ -1,0 +1,179 @@
+﻿@model OgrenciKayit.Models.OgrenciDers
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Not Düzenleme</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="form-group">
+        @Html.Label("Ders Adı", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.DersID, ViewBag.Oders as SelectList, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.OgrenciID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Ad-Soyad", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.OgrenciID, ViewBag.Ogr as SelectList, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DersID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Yıl", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Yil, ViewBag.Yilliste as SelectList, "Seçiniz", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Yil, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Dönem", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Donem, EnumHelper.GetSelectList(typeof(OgrenciKayit.Models.Donem)), "Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Donem, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Vize, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Vize, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Vize, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Mazeret Vize", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.MazeretVize, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.MazeretVize, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Final, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Final, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Final, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Bütünleme", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Butunleme, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Butunleme, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Tek Ders", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.TekDers, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.TekDers, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Başarı Notu", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BasariNotu, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.BasariNotu, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Harf Notu", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.HarfNotu, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Kaydet" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+
+    <script>
+
+        var v = document.getElementById("Vize");
+        var mv = document.getElementById("MazeretVize");
+        var f = document.getElementById("Final");
+        var b = document.getElementById("Butunleme");
+        var ek = document.getElementById("TekDers");
+
+
+        var cbtn = document.getElementById("btn1");
+
+        cbtn.onclick = function () {
+
+            if (Number(v.value) != "" && Number(mv.value) != "") {
+
+
+                alert("Vize veya Mazeret Vize notundan sadece bir tanesi girilmelidir!");
+                return false;
+
+            }
+        }
+
+    </script>
+}
+
+<div>
+    @Html.ActionLink("Geri Dön", "Index")
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+
+    $(function () {
+
+        $('#DersID').change(function () {
+
+            var id = $('#DersID').val();
+
+            $.ajax({
+
+                url: '/OgrenciDers/OgrenciListesi',
+
+                data: { p: id },
+
+                type: "POST",
+
+                dataType: "Json",
+
+                success: function (data) {
+
+                    $('#OgrenciID').empty();
+
+                    for (var i = 0; i < data.length; i++) {
+
+                        $('#OgrenciID').append("<option value='" + data[i].Value + "'>" + data[i].Text + "</Option>");
+
+                    }
+
+                }
+
+            });
+
+        });
+
+    });
+
+</script>
+

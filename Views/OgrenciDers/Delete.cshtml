@@ -1,0 +1,122 @@
+﻿@model OgrenciKayit.Models.OgrenciDers
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>
+    Silmek istediğinize emin misiniz?
+</h3>
+<div>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Öğrenci Numarası")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ogrenci.OgrenciNo)
+            </dd>
+            <dt>
+                @Html.DisplayName("Ad-Soyad")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ogrenci.Ad)
+                @Html.DisplayFor(model => model.Ogrenci.Soyad)
+            </dd>
+            <dt>
+                @Html.DisplayName("Ders Adı")
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Dersler.Ad)
+            </dd>
+            <dt>
+                @Html.DisplayName("Yıl")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Yil)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Dönem")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Donem)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Vize)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Vize)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Mazeret Vize")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MazeretVize)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Final)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Final)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Bütünleme")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Butunleme)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Tek Ders")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TekDers)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Başarı Notu")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BasariNotu)
+            </dd>
+            <dt>
+                @Html.DisplayName("Harf Notu")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HarfNotu)
+            </dd>
+
+
+
+
+        </dl>
+    </div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-danger" /> |
+            @Html.ActionLink("Geri Dön", "Index")
+        </div>
+    }
+</div>

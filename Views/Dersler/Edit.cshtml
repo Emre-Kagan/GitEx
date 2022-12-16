@@ -1,0 +1,139 @@
+﻿@model OgrenciKayit.Models.Dersler
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Ders Düzenle</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.DersID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Ad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kodu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Kodu, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Kodu, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Aktif, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Aktif)
+                    @Html.ValidationMessageFor(model => model.Aktif, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Uygulama, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Uygulama, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Uygulama, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Teorik, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Teorik, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Teorik, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Laboratuvar, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Laboratuvar, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Laboratuvar, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kredi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Kredi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Kredi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Ects Kredi", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EctsKredi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EctsKredi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Zorunlu veya Seçmeli", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ZorunluSecmeli, EnumHelper.GetSelectList(typeof(OgrenciKayit.Models.ZorunluSecmeli)), "Seçiniz", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.ZorunluSecmeli, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Yıllık veya Dönemlik", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.YıllıkDonemlik, EnumHelper.GetSelectList(typeof(OgrenciKayit.Models.YillikDonemlik)), "Seçiniz", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.YıllıkDonemlik, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" id="btn1" class="btn btn-success" />
+            </div>
+        </div>
+    </div>
+    <script>
+
+        var u = document.getElementById("Uygulama");
+        var t = document.getElementById("Teorik");
+        var l = document.getElementById("Laboratuvar");
+        var k = document.getElementById("Kredi");
+        var ek = document.getElementById("EctsKredi");
+        var zs = document.getElementById("ZorunluSecmeli");
+        var yd = document.getElementById("Y_ll_kDonemlik");
+
+        var cbtn = document.getElementById("btn1");
+
+        cbtn.onclick = function () {
+
+            if ((Number(u.value) + Number(t.value) + Number(l.value)) > Number(k.value)
+                || (Number(u.value) + Number(t.value) + Number(l.value)) > Number(ek.value)) {
+                alert("Uygulama, Teorik ve Laboratuvar sayısı 'Kredi' ve 'Ects Kredi' sayısını geçemez!");
+                return false;
+
+            }
+        }
+
+    </script>
+
+
+
+
+
+}
+
+<div>
+    @Html.ActionLink("Geri Dön", "Index")
+</div>

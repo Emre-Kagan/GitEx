@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBOgrenciModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Ogrenci">
+    <Key>
+      <PropertyRef Name="OgrenciID" />
+    </Key>
+    <Property Name="OgrenciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OgrenciNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Ad" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Soyad" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="TcKimlikNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DogumTarihi" Type="DateTime" Precision="0" />
+    <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Adres" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="Uyrugu" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="Fakulte" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Bolum" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Sinif" Type="Int32" Nullable="false" />
+    <Property Name="Mufredat" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="MezuniyetTarihi" Type="DateTime" Precision="3" />
+    <Property Name="BitirdigiUniversite" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Yariyili" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="EgitimTuru" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="BorclulukDurumu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="KulupUyeligi" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="KayitlanmaSekli" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="KayitlanmaPuani" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="KayitlanmaYili" Type="DateTime" Precision="0" />
+    <Property Name="KayitDonemi" Type="Int32" />
+    <Property Name="LiseMezuniyeti" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="LiseMezuniyetiPuani" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Cinsiyet" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="AskerlikDurumu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="EngellilikDurumu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="OrganizasyonID" Type="Int32" />
+    <NavigationProperty Name="Organizasyon" Relationship="DBOgrenciModel.FK__Ogrenci__Organiz__34C8D9D1" FromRole="Ogrenci" ToRole="Organizasyon" />
+    <NavigationProperty Name="OgrenciDers" Relationship="DBOgrenciModel.FK__OgrenciDe__Ogren__403A8C7D" FromRole="Ogrenci" ToRole="OgrenciDers" />
+    <Property Name="Fotograf" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+    <Property Name="OgrHak" Type="Boolean" />
+    <Property Name="AnneAd" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="BabaAd" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="OgrSure" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="DBOgrenciEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Ogrenci" EntityType="Self.Ogrenci" />
+    <EntitySet Name="Dersler" EntityType="DBOgrenciModel.Dersler" />
+    <EntitySet Name="Organizasyon" EntityType="DBOgrenciModel.Organizasyon" />
+    <AssociationSet Name="FK__Organizas__Paren__01142BA1" Association="DBOgrenciModel.FK__Organizas__Paren__01142BA1">
+      <End Role="Organizasyon" EntitySet="Organizasyon" />
+      <End Role="Organizasyon1" EntitySet="Organizasyon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ogrenci__Organiz__34C8D9D1" Association="DBOgrenciModel.FK__Ogrenci__Organiz__34C8D9D1">
+      <End Role="Organizasyon" EntitySet="Organizasyon" />
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+    </AssociationSet>
+    <EntitySet Name="OgrenciDers" EntityType="DBOgrenciModel.OgrenciDers" />
+    <AssociationSet Name="FK__OgrenciDe__DersI__412EB0B6" Association="DBOgrenciModel.FK__OgrenciDe__DersI__412EB0B6">
+      <End Role="Dersler" EntitySet="Dersler" />
+      <End Role="OgrenciDers" EntitySet="OgrenciDers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OgrenciDe__Ogren__403A8C7D" Association="DBOgrenciModel.FK__OgrenciDe__Ogren__403A8C7D">
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+      <End Role="OgrenciDers" EntitySet="OgrenciDers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Dersler">
+    <Key>
+      <PropertyRef Name="DersID" />
+    </Key>
+    <Property Name="DersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Kodu" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Aktif" Type="Boolean" Nullable="false" />
+    <Property Name="Uygulama" Type="Int32" Nullable="false" />
+    <Property Name="Teorik" Type="Int32" Nullable="false" />
+    <Property Name="Laboratuvar" Type="Int32" Nullable="false" />
+    <Property Name="Kredi" Type="Double" Nullable="false" />
+    <Property Name="EctsKredi" Type="Double" Nullable="false" />
+    <Property Name="ZorunluSecmeli" Type="Int32" Nullable="false" />
+    <Property Name="YıllıkDonemlik" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OgrenciDers" Relationship="DBOgrenciModel.FK__OgrenciDe__DersI__412EB0B6" FromRole="Dersler" ToRole="OgrenciDers" />
+    <Property Name="Donemi" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Organizasyon">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentID" Type="Int32" />
+    <Property Name="Ad" Type="String" Nullable="false" MaxLength="200" FixedLength="true" Unicode="true" />
+    <Property Name="KisaAd" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Aktif" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Organizasyon1" Relationship="DBOgrenciModel.FK__Organizas__Paren__01142BA1" FromRole="Organizasyon" ToRole="Organizasyon1" />
+    <NavigationProperty Name="Organizasyon2" Relationship="DBOgrenciModel.FK__Organizas__Paren__01142BA1" FromRole="Organizasyon1" ToRole="Organizasyon" />
+    <NavigationProperty Name="Ogrenci" Relationship="DBOgrenciModel.FK__Ogrenci__Organiz__34C8D9D1" FromRole="Organizasyon" ToRole="Ogrenci" />
+  </EntityType>
+  <Association Name="FK__Organizas__Paren__01142BA1">
+    <End Type="DBOgrenciModel.Organizasyon" Role="Organizasyon" Multiplicity="0..1" />
+    <End Type="DBOgrenciModel.Organizasyon" Role="Organizasyon1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizasyon">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Organizasyon1">
+        <PropertyRef Name="ParentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ogrenci__Organiz__34C8D9D1">
+    <End Type="DBOgrenciModel.Organizasyon" Role="Organizasyon" Multiplicity="0..1" />
+    <End Type="DBOgrenciModel.Ogrenci" Role="Ogrenci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizasyon">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Ogrenci">
+        <PropertyRef Name="OrganizasyonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OgrenciDers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OgrenciID" Type="Int32" Nullable="false" />
+    <Property Name="DersID" Type="Int32" Nullable="false" />
+    <Property Name="Yil" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Donem" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Vize" Type="Int32" />
+    <Property Name="MazeretVize" Type="Int32" />
+    <Property Name="Final" Type="Int32" />
+    <Property Name="Butunleme" Type="Int32" />
+    <Property Name="TekDers" Type="Int32" />
+    <Property Name="BasariNotu" Type="Int32" />
+    <NavigationProperty Name="Dersler" Relationship="DBOgrenciModel.FK__OgrenciDe__DersI__412EB0B6" FromRole="OgrenciDers" ToRole="Dersler" />
+    <NavigationProperty Name="Ogrenci" Relationship="DBOgrenciModel.FK__OgrenciDe__Ogren__403A8C7D" FromRole="OgrenciDers" ToRole="Ogrenci" />
+    <Property Name="HarfNotu" Type="String" MaxLength="3" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__OgrenciDe__DersI__412EB0B6">
+    <End Type="DBOgrenciModel.Dersler" Role="Dersler" Multiplicity="1" />
+    <End Type="DBOgrenciModel.OgrenciDers" Role="OgrenciDers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dersler">
+        <PropertyRef Name="DersID" />
+      </Principal>
+      <Dependent Role="OgrenciDers">
+        <PropertyRef Name="DersID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OgrenciDe__Ogren__403A8C7D">
+    <End Type="DBOgrenciModel.Ogrenci" Role="Ogrenci" Multiplicity="1" />
+    <End Type="DBOgrenciModel.OgrenciDers" Role="OgrenciDers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ogrenci">
+        <PropertyRef Name="OgrenciID" />
+      </Principal>
+      <Dependent Role="OgrenciDers">
+        <PropertyRef Name="OgrenciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

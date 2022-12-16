@@ -1,0 +1,117 @@
+﻿@model IEnumerable<OgrenciKayit.Models.Ogrenci>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2 style="position:relative; top:50px;">Öğrenci Listesi</h2>
+<br />
+<h3 style="position:relative; padding-left:1130px">
+    @Html.ActionLink("Öğrenci Ekle", "Create")
+</h3>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Öğrenci Numarası")
+        </th>
+        <th>
+            @Html.DisplayName("Ad")
+        </th>
+        <th>
+            @Html.DisplayName("Soyad")
+        </th>
+        <th>
+            @Html.DisplayName("TC Kimlik Numarası")
+        </th>
+        <th>
+            @Html.DisplayName("Doğum Tarihi")
+        </th>
+        <th>
+            @Html.DisplayName("Telefon")
+        </th>
+        <th>
+            @Html.DisplayName("E-mail")
+        </th>
+        <th>
+            @Html.DisplayName("Adres")
+        </th>
+        <th>
+            @Html.DisplayName("Uyruk")
+        </th>
+        <th>
+            @Html.DisplayName("Organizasyon")
+        </th>
+        <th>
+            @Html.DisplayName("Sınıf")
+        </th>
+        <th style="padding-left:50px">
+            @Html.DisplayName("Fotoğraf")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OgrenciNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soyad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TcKimlikNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DogumTarihi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Uyrugu)
+            </td>
+            <td>
+                @foreach (var item1 in ViewBag.parent)
+                {
+                    if (item1.ID == item.OrganizasyonID)
+                    {
+                        @item1.Ad
+                        break;
+                    }
+
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sinif)
+            </td>
+            <td>
+                <img src="~/Fotograf/@item.Fotograf" />
+
+                @*<img src="@Url.Content(item.Fotograf)" alt="Image" />*@
+
+            </td>
+            <td>
+                @Html.ActionLink("Detay", "Details", new { id = item.OgrenciID })
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.OgrenciID }) <br />
+                @Html.ActionLink("Sil", "Delete", new { id = item.OgrenciID })
+            </td>
+        </tr>
+
+    }
+
+</table>

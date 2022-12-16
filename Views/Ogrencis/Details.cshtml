@@ -1,0 +1,291 @@
+﻿@model OgrenciKayit.Models.Ogrenci
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h3>Detaylar</h3>
+<br />
+<img src="~/Fotograf/@Model.Fotograf" />
+<br />
+<br />
+@*@Html.ActionLink("Öğrenci Belgesi", "OgrenciRaporu", new { id = Model.OgrenciID })*@
+<input type="button" class="btn btn-primary" value="Öğrenci Belgesi" onclick="location.href='@Url.Action("OgrenciRaporu", new { id = Model.OgrenciID })'" />
+<br />
+<br />
+<input type="button" class="btn btn-primary" value="Transkript" onclick="location.href='@Url.Action("Trapor", "OgrenciDers", new { id = Model.OgrenciID }, null)'" />
+
+@*@Html.ActionLink("Transkript", "Trapor", "OgrenciDers", new { id = Model.OgrenciID }, null)*@
+
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Öğrenci Numarası")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OgrenciNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Ad")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Soyad")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Soyad)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayName("Anne Adı")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnneAd)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayName("Baba Adı")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BabaAd)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("TKimlik Numarası")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TcKimlikNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Doğum Tarihi")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DogumTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Telefon")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefon)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("E-mail")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Adres")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adres)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Uyruk")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Uyrugu)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Organizasyon")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Organizasyon.Ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Sınıf")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sinif)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Müfredat")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mufredat)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Mezuniyet Tarihi")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MezuniyetTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Bitirdiği Üniversite")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BitirdigiUniversite)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Yarıyılı")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Yariyili)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Eğitim Türü")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EgitimTuru)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Borçluluk Durumu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BorclulukDurumu)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kulüp Üyeliği")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KulupUyeligi)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kayıtlanma Şekli")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KayitlanmaSekli)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kayıtlanma Puanı")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KayitlanmaPuani)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kayıtlanma Yılı")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KayitlanmaYili)
+        </dd>
+        <dt>
+            @Html.DisplayName("Öğrenim Süresi")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OgrSure)
+        </dd>
+        <dt>
+            @Html.DisplayName("Kayıtlanma Dönemi")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KayitDonemi)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Lise Mezuniyeti")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiseMezuniyeti)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Lise Mezuniyeti Puanı")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiseMezuniyetiPuani)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Cinsiyet")
+        </dt>
+
+        <dd>
+            @if (Model.Cinsiyet == "0         ")
+            {
+                @Html.DisplayName("Erkek")
+            }
+            else if (Model.Cinsiyet == "1         ")
+            {
+                @Html.DisplayName("Kadın")
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Askerlik Durumu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AskerlikDurumu)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Engellilik Durumu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EngellilikDurumu)
+        </dd>
+        <dt>
+            @Html.DisplayName("Öğrencilik Hakkı")
+        </dt>
+        <dd>
+            @if (Model.OgrHak == true)
+            {
+                @Html.DisplayName("Evet")
+            }
+            else
+            {
+                @Html.DisplayName("Hayır")
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.OgrenciID }) |
+    @Html.ActionLink("Geri Dön", "Index")
+</p>

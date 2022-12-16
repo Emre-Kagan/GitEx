@@ -1,0 +1,67 @@
+﻿@model OgrenciKayit.Models.Ogrenci
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OgrenciBelgesi</title>
+    <style type="text/css">
+
+        .konum {
+            position: relative;
+            padding-left: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <img style="position:absolute; padding-left: 100px; top:140px" src="~/Fotograf/m.png" />
+    <img style="position: relative; padding-left: 650px; top: 115px" src="~/Fotograf/y.png" />
+    @Html.Label(DateTime.Now.ToLongDateString(), new {@style= "position: relative; padding-left: 660px; top: 110px" });
+    <center><p><b>T.C.</b><br /><b> YÜKSEKÖĞRETİM KURULU BAŞKANLIĞI</b> <br /><b>ANKARA</b></p></center>
+    <center><br /><p><b>ÖĞRENCİ BELGESİ</b></p></center>
+    <br />
+    <p class="konum"><b>T.C. Kimlik No:</b> @Model.TcKimlikNo </p>
+    <p class="konum"><b>Adı:</b> @Model.Ad </p>
+    <p class="konum"><b>Soyadı:</b> @Model.Soyad </p>
+    <p class="konum"><b>Anne Adı:</b> @Model.AnneAd </p>
+    <p class="konum"><b>Baba Adı:</b> @Model.BabaAd </p>
+    <p class="konum"><b>Doğum Tarihi:</b> @Model.DogumTarihi.Value.ToShortDateString()</p>
+    <p class="konum"><b>Uyruğu: </b>@Model.Uyrugu</p>
+    <p class="konum"><b>Sınıfı: </b>@Model.Sinif</p>
+    <p class="konum"><b>Kayıt Tarihi: </b>@Model.KayitlanmaYili.Value.ToShortDateString()</p>
+    <p class="konum">
+        <b>Üniversite/Fakülte/MYO/YO/Enstütü/Bölüm/Program: </b>
+
+        @foreach (var item in ViewBag.parent)
+        {
+            if (item.ID == Model.OrganizasyonID)
+            {
+                @item.Ad
+                break;
+            }
+
+        }
+
+    </p>
+    <p class="konum"><b>Eğitim Türü: </b>@Model.EgitimTuru</p>
+    <p class="konum"><b>Öğrenim Süresi: </b>@Model.OgrSure</p>
+    @if (Model.OgrHak == true)
+    {
+        <p class="konum"><b>Öğrencilik Hakkı Var mı?: </b>Evet</p>
+    }
+    else
+    {
+        <p class="konum"><b>Öğrencilik Hakkı Var mı?: </b>Hayır</p>
+    }
+    <center><br /><b>İLGİLİ MAKAMA</b><br /><br />Yukarıda kimlik bilgileri verilen öğrenci MARMARA ÜNİVERSİTESİ öğrencisidir.</center>
+
+
+
+</body>
+</html>

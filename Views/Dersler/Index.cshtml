@@ -1,0 +1,89 @@
+﻿@model IEnumerable<OgrenciKayit.Models.Dersler>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="position:relative; top:50px;">Dersler</h2>
+<br/>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h3 style="position:relative; padding-left:1150px">
+    @Html.ActionLink("Ders Ekle", "Create")
+</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kodu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aktif)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Uygulama)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Teorik)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Laboratuvar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kredi)
+        </th>
+        <th>
+            @Html.DisplayName("Ects Kredi")
+        </th>
+        <th>
+            @Html.DisplayName("Zorunlu veya Seçmeli")
+        </th>
+        <th>
+            @Html.DisplayName("Yıllık veya Dönemlik")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kodu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aktif)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Uygulama)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Teorik)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Laboratuvar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kredi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EctsKredi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ZorunluSecmeli)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YıllıkDonemlik)
+        </td>
+        <td>
+            @Html.ActionLink("Detay", "Details", new { id = item.DersID }) <br />
+            @Html.ActionLink("Düzenle", "Edit", new { id = item.DersID }) <br />
+            @Html.ActionLink("Sil", "Delete", new { id = item.DersID })
+        </td>
+    </tr>
+}
+
+</table>

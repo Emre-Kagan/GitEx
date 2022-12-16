@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="453f419ece784547b952d1119ce0b163" Name="Diagram1" ZoomLevel="46">
+        <EntityTypeShape EntityType="DBOgrenciModel.Ogrenci" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBOgrenciModel.Dersler" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DBOgrenciModel.Organizasyon" Width="1.5" PointX="3.375" PointY="4.75" />
+        <AssociationConnector Association="DBOgrenciModel.FK__Organizas__Paren__01142BA1" />
+        <AssociationConnector Association="DBOgrenciModel.FK__Ogrenci__Organiz__34C8D9D1" />
+        <EntityTypeShape EntityType="DBOgrenciModel.OgrenciDers" Width="1.5" PointX="5.625" PointY="2.625" />
+        <AssociationConnector Association="DBOgrenciModel.FK__OgrenciDe__DersI__412EB0B6" />
+        <AssociationConnector Association="DBOgrenciModel.FK__OgrenciDe__Ogren__403A8C7D" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

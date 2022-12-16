@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBOgrenciModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Ogrenci">
+    <Key>
+      <PropertyRef Name="OgrenciID" />
+      <PropertyRef Name="OgrenciNo" />
+      <PropertyRef Name="Ad" />
+      <PropertyRef Name="Soyad" />
+      <PropertyRef Name="TcKimlikNo" />
+      <PropertyRef Name="Sinif" />
+      <PropertyRef Name="BaslamaYili" />
+      <PropertyRef Name="KayitlanmaYili" />
+    </Key>
+    <Property Name="OgrenciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OgrenciNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Ad" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Soyad" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="TcKimlikNo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DogumTarihi" Type="DateTime" Precision="3" />
+    <Property Name="Telefon" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Adres" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+    <Property Name="Uyrugu" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="Fakulte" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Bolum" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Sinif" Type="Int32" Nullable="false" />
+    <Property Name="Mufredat" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="BaslamaYili" Type="Int32" Nullable="false" />
+    <Property Name="MezuniyetTarihi" Type="DateTime" Precision="3" />
+    <Property Name="BitirdigiUniversite" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Yariyili" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="EgitimTuru" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="BorclulukDurumu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="KulupUyeligi" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="KayitlanmaSekli" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="KayitlanmaPuani" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="KayitlanmaYili" Type="Int32" Nullable="false" />
+    <Property Name="KayitDonemi" Type="Int32" />
+    <Property Name="LiseMezuniyeti" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="LiseMezuniyetiPuani" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Cinsiyet" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="AskerlikDurumu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="EngellilikDurumu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="DBOgrenciEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Ogrencis" EntityType="Self.Ogrenci" />
+  </EntityContainer>
+</Schema>

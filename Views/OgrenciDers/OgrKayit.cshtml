@@ -1,0 +1,68 @@
+﻿@model OgrenciKayit.Models.OgrenciDers
+
+@{
+    ViewBag.Title = "OgrKayit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Ögrenci Ders Kaydı</h3>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.Label("Yıl", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Yil, ViewBag.Yilliste as SelectList, "Seçiniz", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Yil, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Dönem", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.Donem, EnumHelper.GetSelectList(typeof(OgrenciKayit.Models.Donem)), "Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Donem, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Ders Adı", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.DersID, ViewBag.Fders as SelectList,"Seçiniz", htmlAttributes: new { @class = "js-example-basic-single" })
+            @Html.ValidationMessageFor(model => model.DersID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Ad-Soyad", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.OgrenciID, ViewBag.Ogr as SelectList,"Seçiniz", htmlAttributes: new { @class = "js-example-basic-single" })
+            @Html.ValidationMessageFor(model => model.OgrenciID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Kaydet" class="btn btn-success" />
+        </div>
+    </div>
+</div>
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-single').select2();
+    });
+</script>
+
+<div>
+    @Html.ActionLink("Geri Dön", "Index")
+</div>

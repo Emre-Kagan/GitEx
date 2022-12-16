@@ -1,0 +1,75 @@
+﻿@model OgrenciKayit.Models.Organizasyon
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<h3>Organizasyonu silmek istediğinize emin misiniz?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kısa Ad")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KisaAd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aktif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aktif)
+        </dd>
+
+    </dl>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="padding-left:150px">
+            <input type="submit" value="Sil" id="btn2" class="btn btn-danger" /> |
+            @Html.ActionLink("Geri Dön", "Index")
+        </div>
+    }
+</div>
+
+<script>
+
+    var cbtn = document.getElementById("btn2");
+
+
+    cbtn.onclick = function () {
+
+        if ('@ViewBag.alarm' == "parent") {
+            alert("Bağlı kayıtlar olduğu için silinemez!");
+            return false;
+
+        }
+    }
+
+</script>
+
+

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<OgrenciKayit.Models.Organizasyon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<h2 style="position:relative; top:50px;">Organizasyon Listesi</h2>
+<br />
+<h5 style="position:relative;font-size:16px; padding-left:1130px">
+    @Html.ActionLink("Organizasyon Ekle", "Create")
+</h5>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ParentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ad)
+        </th>
+        <th>
+            @Html.DisplayName("Kısa Ad")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aktif)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KisaAd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aktif)
+            </td>
+            <td>
+                @Html.ActionLink("Detay", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Düzenle", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Sil", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

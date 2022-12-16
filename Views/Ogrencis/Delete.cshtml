@@ -1,0 +1,314 @@
+﻿@model OgrenciKayit.Models.Ogrenci
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/alertify.min.js"></script>
+<link href="~/Content/themes/alertify.core.css" rel="stylesheet" />
+<link href="~/Content/themes/alertify.default.css" rel="stylesheet" />
+
+
+
+
+<h2>Silmek istediğinize emin misiniz?</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Öğrenci Numarası")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OgrenciNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Ad")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Soyad")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Soyad)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("TC Kimlik Numarası")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TcKimlikNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Doğum Tarihi")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DogumTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Telefon")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefon)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("E-mail")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Adres")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adres)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Uyruk")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Uyrugu)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Organizasyon")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Organizasyon.Ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Sınıf")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sinif)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Müfredat")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mufredat)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Mezuniyet Tarihi")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MezuniyetTarihi)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Bitirdiği Üniversite")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BitirdigiUniversite)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Yarıyılı")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Yariyili)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Eğitim Türü")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EgitimTuru)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Borçluluk Durumu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BorclulukDurumu)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kulüp Üyeliği")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KulupUyeligi)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kayıtlanma Şekli")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KayitlanmaSekli)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kayıtlanma Puanı")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KayitlanmaPuani)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kayıtlanma Yılı")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KayitlanmaYili)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kayıtlanma Dönemi")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KayitDonemi)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Lise Mezuniyeti")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiseMezuniyeti)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Lise Mezuniyeti Puanı")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiseMezuniyetiPuani)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Cinsiyet")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cinsiyet)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Askerlik Durumu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AskerlikDurumu)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Engellilik Durumu")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EngellilikDurumu)
+        </dd>
+
+    </dl>
+
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Sil" id="dlt" onclick="AjaxFormSubmit()" class="btn btn-danger" /> |
+        @Html.ActionLink("Geri Dön", "Index")
+    </div>
+
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+<script>
+        //var btn = document.getElementById("dlt");
+
+        alertify.set({ labels: { ok: "Tamam" } });
+
+
+        function AjaxFormSubmit() {
+
+            var person = {};
+            person.Id = @Model.OgrenciID;
+ 
+            $.ajax({
+                type: "POST",
+                url: '/Ogrencis/DeleteConfirmed',
+                data: JSON.stringify(person),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    if (response.result == true) {
+                        alertify.alert("Öğrenci başarıyla silindi!", function () {
+                            window.location.href ='/Ogrencis/Index';
+                        });
+                    }
+                    else {
+                        alertify.alert(response.error);
+                    }
+                },
+                error: function (response) {
+                    console.log(response)
+                }
+            });
+
+
+
+        }
+
+
+
+</script>
+
+
+
+<!--<script>
+        var btn = document.getElementById("dlt");
+
+        alertify.set({ labels: { ok: "Tamam" } });
+
+
+        btn.onclick = function () {-->
+@*var OgrId =@Model.OgrenciID;*@
+
+<!--if (@ViewData["data"]== 0) {
+            alertify.alert("Öğrenciye ait ilişkili kayıtlar olduğu için silinemez!")
+            return false;
+
+        }
+
+
+
+
+
+
+    }
+
+
+
+</script>-->

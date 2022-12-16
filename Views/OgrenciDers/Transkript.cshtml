@@ -1,0 +1,284 @@
+﻿@*@using OgrenciKayit.Models;
+    @model OgrenciDers*@
+@model OgrenciKayit.Models.TranskriptModel
+
+@{
+    Layout = null;
+}
+
+@{
+    double kredi = 0;
+    double phesap = 0;
+    double tkredi = 0;
+    double tects = 0;
+    double bkredi = 0;
+    double bects = 0;
+    double tpuan = 0;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Transkript</title>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <style type="text/css">
+
+        .konum {
+            position: relative;
+            padding-left: 100px;
+        }
+        .konum2 {
+            position: relative;
+            padding-left:400px;
+            padding-top:-200px;
+        }
+        tr {
+            page-break-inside: avoid;
+        }
+    </style>
+</head>
+<body>
+    <img style="position:absolute; padding-left: 60px; top:20px" src="~/Fotograf/m.png" />
+    @Html.Label(DateTime.Now.ToLongDateString(), new { @style = "position: relative; padding-left: 660px; top: 130px" })
+    <br />
+    <center><p style="font-size:larger"><b>T.C.</b><br /><b>MARMARA ÜNİVERSİTESİ</b> <br /><b>BAŞARI DURUM BELGESİ</b></p></center>
+    <br />
+    @*<table>
+
+            <tr>
+                <th>T.C. Kimlik No: </th>
+                <td>
+
+                    @Model.OgrTrans.OgrenciNo
+
+
+
+                </td>
+            </tr>
+
+
+
+        </table>*@
+
+    <br /><br /><br />
+
+    <p class="konum"><b>T.C. Kimlik No:</b> @Model.OgrTrans.TcKimlikNo </p>
+    <p class="konum"><b>Öğrenci No:</b> @Model.OgrTrans.OgrenciNo </p>
+    <p class="konum"><b>Ad: </b> @Model.OgrTrans.Ad </p>
+    <p class="konum"><b>Soyad: </b> @Model.OgrTrans.Soyad </p>
+    <p class="konum">
+        <b>Fakülte/Bölüm: </b>
+        @foreach (var Org in ViewBag.parent)
+        {
+            if (Org.ID == Model.OgrTrans.OrganizasyonID)
+            {
+                @Org.Ad
+                break;
+            }
+
+        }
+
+    </p>
+    <p class="konum"><b>Kayıt Tarihi:</b> @Model.OgrTrans.KayitlanmaYili.Value.ToShortDateString() </p>
+    <p class="konum"><b>Mezuniyet Tarihi: </b>-</p>
+
+
+
+
+    <br /><br /><br /><br />
+
+    @foreach (var yilDonem in Model.YilDonemList)
+    {
+
+        <table class="table table-bordered">
+
+            <thead>
+                <tr>
+                    <th>
+                        @if (yilDonem.Yil == "1")
+                        {
+                            @:2022 - 2023
+                        }
+                        else if (yilDonem.Yil == "2")
+                        {
+
+                            @:2023-2024
+                        }
+                        else if (yilDonem.Yil == "3")
+                        {
+                            @:2024-2025
+                        }
+                        else if (yilDonem.Yil == "4")
+                        {
+                            @:2025 - 2026
+                        }
+                        else if (yilDonem.Yil == "5")
+                        {
+                            @:2026-2027
+                        }
+                        &nbsp;
+                        @if (yilDonem.Donem == "0")
+                        {
+                            @:Güz
+
+                        }
+                        else if (yilDonem.Donem == "1")
+                        {
+                            @:Bahar
+                        }
+                        else if (yilDonem.Donem == "2")
+                        {
+                            @:Yaz
+                        }
+
+
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="info">
+                    <th>Ders Kodu</th>
+                    <th>Ders Adı</th>
+                    <th>Kredi | Ects</th>
+                    <th>Harfli Başarı Notu</th>
+                    <th>Açıklama</th>
+
+                </tr>
+
+                @foreach (var ogrenciDers in Model.OgrenciDersList.Where(i => i.Donem == yilDonem.Donem & i.Yil == yilDonem.Yil))
+                {
+
+
+                    <tr>
+
+                        <td>@ogrenciDers.DrsKod</td>
+                        <td>@ogrenciDers.DrsAd</td>
+                        <td>@ogrenciDers.DrsKredi | @ogrenciDers.DrsEcts</td>
+                        <td>
+
+                            @ogrenciDers.HrfNotu
+
+                        </td>
+
+                        <td></td>
+
+                    </tr>
+
+                    if (ogrenciDers.HrfNotu == "AA")
+                    {
+                        kredi = ogrenciDers.DrsKredi * 4.00;
+                    }
+                    else if (ogrenciDers.HrfNotu == "BA")
+                    {
+                        kredi = ogrenciDers.DrsKredi * 3.50;
+                    }
+                    else if (ogrenciDers.HrfNotu == "BB")
+                    {
+                        kredi = ogrenciDers.DrsKredi * 3.00;
+                    }
+                    else if (ogrenciDers.HrfNotu == "CB")
+                    {
+                        kredi = ogrenciDers.DrsKredi * 2.50;
+                    }
+                    else if (ogrenciDers.HrfNotu == "CC")
+                    {
+                        kredi = ogrenciDers.DrsKredi * 2.00;
+                    }
+                    else if (ogrenciDers.HrfNotu == "DC")
+                    {
+                        kredi = ogrenciDers.DrsKredi * 1.50;
+                    }
+                    else if (ogrenciDers.HrfNotu == "FF")
+                    {
+                        kredi = ogrenciDers.DrsKredi * 0.00;
+                    }
+
+
+                    phesap += kredi;
+                    tkredi += ogrenciDers.DrsKredi;
+                    tects += ogrenciDers.DrsEcts;
+                    bkredi += ogrenciDers.DrsKredi;
+                    bects += ogrenciDers.DrsEcts;
+
+
+                }
+
+
+
+
+            </tbody>
+            <tfoot>
+
+                @{
+                    tpuan += phesap;
+                    @*@Math.Round((phesap/tkredi),2)*@
+                }
+                <tr class="info"><th></th><th>Alınan Kredi</th><th>Tamamlanan Kredi</th><th>Puan</th><th>YANO/GANO</th></tr>
+                <tr><th>Yarıyıl:</th><td>@tkredi | @tects</td><td>@tkredi | @tects</td><td>@phesap</td><td>@Math.Round((phesap / tkredi), 2)</td></tr>
+                <tr><th>Birikimli:</th><td>@bkredi | @bects</td><td>@bkredi | @bects</td><td>@tpuan</td><td>@Math.Round((tpuan / bkredi), 2)</td></tr>
+
+            </tfoot>
+
+        </table>
+        <br />
+        <br />
+        kredi = 0;
+        phesap = 0;
+        tkredi = 0;
+        tects = 0;
+    }
+</body>
+</html>
+
+@*<tr>
+        <th>Ders Kodu</th>
+        <th>Ders Adı</th>
+        <th>Kredi | Ects</th>
+        <th>Harfli Başarı Notu</th>
+    </tr>*@
+
+@*<th>@item.Kodu</th>*@
+@*<th>@item.Dersler.Ad</th>
+    <th>@item.Dersler.Kredi | @item.Dersler.EctsKredi</th>
+    <th>@item.HarfNotu</th>*@
+
+@*@foreach (var ders in Model)
+    {
+
+        <tr>
+            <td>@ders.Kodu</td>
+            <td>@ders.Ad</td>
+            <td>@ders.Kredi | @ders.EctsKredi</td>
+            <td>
+
+
+                @foreach (var item in Model.OgrDers)
+                {
+                    @item.HarfNotu
+                }
+
+            </td>
+        </tr>
+
+
+    }*@
+
+@*@foreach (var ogrders in Model)
+    {
+
+        <tr>
+            <td>@ogrders.Dersler.Kodu</td>
+            <td>@ogrders.Dersler.Ad</td>
+            <td>@ogrders.Dersler.Kredi | @ogrders.Dersler.EctsKredi</td>
+            <td>
+
+                @ogrders.HarfNotu
+
+            </td>
+        </tr>
+    }*@

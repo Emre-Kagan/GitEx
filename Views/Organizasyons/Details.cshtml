@@ -1,0 +1,51 @@
+﻿@model OgrenciKayit.Models.Organizasyon
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br/>
+<h4>Organizasyon Detay</h4>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParentID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ad)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Kısa Ad")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KisaAd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aktif)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aktif)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Geri Dön", "Index")
+</p>

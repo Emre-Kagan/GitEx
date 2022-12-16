@@ -1,0 +1,400 @@
+﻿@model IEnumerable<OgrenciKayit.Models.OgrenciDers>
+
+
+<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="@Url.Content("~/Scripts/gridmvc.min.js")" type="text/javascript"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<link href="@Url.Content("~/Content/Css/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+@*<script src="~/Scripts/excel-bootstrap-table-filter-bundle.js"></script>
+    <link href="~/Content/excel-bootstrap-table-filter-style.css" rel="stylesheet" />*@
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
+
+<link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
+
+
+<style>
+    .dataTables_filter {
+        position: relative;
+        padding-right: 600px;
+    }
+
+
+    
+    .tbody {
+        display: table-header-group;
+    }
+    
+</style>
+
+@*<script>
+        $(document).ready(function () {
+            $('#example').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json"
+                },
+
+                'columnDefs': [{ 'orderable': false, 'targets': 12 }], // hide sort icon on header of first column
+                'aaSorting': [[1, 'asc']] // start to sort data in second column
+
+
+
+            });
+
+
+
+
+        });
+    </script>*@
+@*<script>
+        $(document).ready(function () {
+            // Setup - add a text input to each footer cell
+            $('#example thead tr')
+                .clone(true)
+                .addClass('filters')
+                .appendTo('#example thead');
+
+            var table = $('#example').DataTable({
+                orderCellsTop: true,
+                fixedHeader: true,
+                initComplete: function () {
+                    var api = this.api();
+
+                    // For each column
+                    api
+                        .columns()
+                        .eq(0)
+                        .each(function (colIdx) {
+                            // Set the header cell to contain the input element
+                            var cell = $('.filters th').eq(
+                                $(api.column(colIdx).header()).index()
+                            );
+                            var title = $(cell).text();
+                            if (title) {
+                                $(cell).html('<input type="text" style="max-width: 70px; font-size: 9px;" />');
+                            }
+
+                            // On every keypress in this input
+                            $(
+                                'input',
+                                $('.filters th').eq($(api.column(colIdx).header()).index())
+                            )
+                                .off('keyup change')
+                                .on('change', function (e) {
+                                    // Get the search value
+                                    $(this).attr('title', $(this).val());
+                                    var regexr = '({search})'; //$(this).parents('th').find('select').val();
+
+                                    var cursorPosition = this.selectionStart;
+                                    // Search the column for that value
+                                    api
+                                        .column(colIdx)
+                                        .search(
+                                            this.value != ''
+                                                ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                                : '',
+                                            this.value != '',
+                                            this.value == ''
+                                        )
+                                        .draw();
+                                })
+                                .on('keyup', function (e) {
+                                    e.stopPropagation();
+
+                                    $(this).trigger('change');
+                                    $(this)
+                                        .focus()[0]
+                                        .setSelectionRange(cursorPosition, cursorPosition);
+                                });
+                        });
+                },
+            });
+        });
+    </script>*@
+
+<script>
+    $(document).ready(function () {
+        $('#example').DataTable({
+
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function () {
+                        var column = this;
+                        var text = $(column.header()).text();
+                        if (text) {
+                            var select = $('<select style="position:relative; max-width:100px;"><option value=""></option></select>')
+                                .appendTo($(column.header()))
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                });
+
+                            column
+                                .data()
+                                .unique()
+                                .sort()
+                                .each(function (d, j) {
+                       
+                                    select.append('<option value="' + d + '">' + d + '</option>');
+                                   
+                                    $(select).click(function (e) {
+                                        e.stopPropagation();
+                                    });
+                               
+                                });
+
+                        }
+                  });
+            
+            },
+
+
+
+
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/tr.json"
+            },
+
+            'columnDefs': [{ 'orderable': false, 'targets': 12 }], // hide sort icon on header of first column
+            'aaSorting': [[1, 'asc']] // start to sort data in second column   
+        });
+    });
+
+</script>
+
+
+@*<script>
+
+        $('#example').excelTableFilter();
+
+    </script>*@
+
+
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="position:relative;top:20px;">Öğrenci Dersleri</h2>
+
+<h3 style="width: 100px; float:right">
+
+    @Html.ActionLink("Not Girin", "Create")
+</h3>
+
+<h3 style="width: 190px; float:right">
+
+    @Html.ActionLink("Öğrenci Kaydı", "OgrKayit")
+</h3>
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Ders Adı")
+            </th>
+            <th>
+                @Html.DisplayName("Öğrenci No")
+            </th>
+            <th>
+                @Html.DisplayName("Ad-Soyad")
+            </th>
+            <th>
+                @Html.DisplayName("Yıl")
+            </th>
+            <th>
+                @Html.DisplayName("Dönem")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vize)
+            </th>
+            <th>
+                @Html.DisplayName("Mazeret Vize")
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Final)
+            </th>
+            <th>
+                @Html.DisplayName("Bütünleme")
+            </th>
+            <th>
+                @Html.DisplayName("Tek Ders")
+            </th>
+            <th>
+                @Html.DisplayName("Başarı Notu")
+            </th>
+            <th>
+                @Html.DisplayName("Harf Notu")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dersler.Ad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ogrenci.OgrenciNo)
+                </td>
+                <td>
+                    @{ 
+                        string AdSoyad = item.Ogrenci.Ad + " " + item.Ogrenci.Soyad;
+
+                    }
+                    @Html.DisplayName(AdSoyad)
+                    @*@Html.DisplayFor(modelItem => item.Ogrenci.Soyad)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Yil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Donem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vize)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MazeretVize)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Final)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Butunleme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TekDers)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasariNotu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HarfNotu)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Detay", "Details", new { id = item.ID })
+                    @Html.ActionLink("Düzenle", "Edit", new { id = item.ID })
+                    <br />
+                    @Html.ActionLink("Sil", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+    
+</table>
+
+
+
+
+@*<input type="search" name="searchbar" value="" id="searchbar" placeholder="Arama yapınız"/>*@
+
+@*<input type="text" id="txtCustomerName" placeholder="Arama yapınız" style="position:relative;top:25px; padding-left:10px;" />*@
+
+@*@Html.Grid(Model).Columns(columns =>
+    {
+        columns.Add(foo => foo.Dersler.Ad).Titled("Ders Adı").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.Ogrenci.OgrenciNo).Titled("Öğrenci No").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.Ogrenci.Ad).Titled("Öğrenci Adı").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.Ogrenci.Soyad).Titled("Öğrenci Soyadı").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.Yil).Titled("Yıl").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.Donem).Titled("Dönem").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.Vize).Titled("Vize").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.MazeretVize).Titled("MazeretVize").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.Final).Titled("Final").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.Butunleme).Titled("Bütünleme").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.TekDers).Titled("Tek Ders").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.BasariNotu).Titled("Başarı Notu").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.HarfNotu).Titled("Harf Notu").Sortable(true).Filterable(true);
+
+
+    }).WithPaging(20)*@
+
+@*@(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(foo => foo.Dersler.Ad).Titled("Ders Adı").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.Ogrenci.OgrenciNo).Titled("Öğrenci No").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.Ogrenci.Ad).Titled("Öğrenci Adı").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.Ogrenci.Soyad).Titled("Öğrenci Soyadı").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.Yil).Titled("Yıl").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.Donem).Titled("Dönem").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.Vize).Titled("Vize").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.MazeretVize).Titled("MazeretVize").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.Final).Titled("Final").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.Butunleme).Titled("Bütünleme").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.TekDers).Titled("Tek Ders").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.BasariNotu).Titled("Başarı Notu").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.HarfNotu).Titled("Harf Notu").Sortable(true).Filterable(true);
+        })
+        .Id("tblCustomers")
+    )*@
+
+@*<input id="GridSearch" />
+
+    @Html.AjaxGrid(Url.Action("IndexGrid"))
+
+
+    <script>
+        document.getElementById('GridSearch').addEventListener('input', function () {
+            debugger;
+            var grid = new MvcGrid(document.querySelector('.mvc-grid'));
+            grid.query.set('search', this.value);
+
+            grid.reload();
+        });
+    </script>*@
+
+@*Ara:
+    <input id="ara" type="text" style="position:relative;top:-470px; padding-left:300px;" />*@
+
+
+
+
+@*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
+@*<script type="text/javascript">
+    $(function () {
+        GetCustomers();
+        $("#txtCustomerName").keyup(function () {
+            GetCustomers();
+        });
+    });
+    function GetCustomers() {
+        var customerName = $.trim($("#txtCustomerName").val());
+
+        $.ajax({
+            type: "POST",
+            url: "/OgrenciDers/SearchAll",
+            data: "{yazilan:'" + customerName + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (customers) {
+                console.log(customers);
+                var table = $("#tblCustomer");
+                table.find("tr:not(:first)").remove();
+
+
+                $.each(customers, function (i, customer) {
+
+
+
+
+                });
+            },
+            error: function (jqXHR, exception) {
+                console.log("hata");
+            }
+        });
+    }
+</script>*@
