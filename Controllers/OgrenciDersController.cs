@@ -22,7 +22,7 @@ namespace OgrenciKayit.Controllers
         // GET: OgrenciDers
         public ActionResult Index()
         {
-            var gitdeneme = 0;
+            
             var ogrenciDers = db.OgrenciDers.Include(o => o.Dersler).Include(o => o.Ogrenci);
             //var ogrenciDers = (from od in db.OgrenciDers
             //                   join d in db.Dersler on od.DersID equals d.DersID
